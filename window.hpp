@@ -1,5 +1,4 @@
 #include "base_defs.hpp"
-#include "sd_error.hpp"
 
 #define GLFW_INCLUDE_VULKAN
 #include <GLFW/glfw3.h>
@@ -30,6 +29,6 @@ namespace SD_NAMESPACE
       ~ Window ();
       Window ( std::string const & windowName = SD_APPLICATION_NAME ); // Default parameter, pode ser removido
 
-      Code Create ( std::string const & windowName = SD_APPLICATION_NAME );
+      void create ( std::string const & windowName = SD_APPLICATION_NAME );
   };
 }

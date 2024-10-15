@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <cstdlib>
+#include <stdexcept>
 
 namespace SD_NAMESPACE
 {
@@ -24,20 +25,20 @@ namespace SD_NAMESPACE
   }
 
 
-  Code Window::Create ( std::string const & windowName )
+  void Window::create ( std::string const & windowName )
   {
     GLFWmonitor * primaryMonitor = glfwGetPrimaryMonitor(); // pega o monitor principal
   
     if ( primaryMonitor == nullptr )
     {
-      return Code::ePlaceholder;
+      throw std::runtime_error ( "Could get information about the main display" );
     }
 
     GLFWvidmode const * videoMode = glfwGetVideoMode ( primaryMonitor ); // pega a resolucao
 
     if ( videoMode == nullptr )
     {
-      return Code::ePlaceholder;;
+      throw std::runtime_error ( "Could get information about the main display" );
     }
 
     glfwWindowHint ( GLFW_CLIENT_API, GLFW_NO_API ); // indica que a gente nao vai usar OpenGL
@@ -47,7 +48,7 @@ namespace SD_NAMESPACE
 
     if ( m_windowPtr == nullptr )
     {
-      return Code::ePlaceholder;;
+      throw std::runtime_error ( "Window creation has failed" );
     }
 
     return Code::eSuccess;
